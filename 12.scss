@@ -1,0 +1,56 @@
+$numcol: 12;
+@function cal-width($n){
+	@return percentage($n/$numcol);
+}
+
+@mixin gencol($size,$n){
+	.col-#{$size}-#{$n}{
+		width: cal-width($n);
+	}
+}
+// @for $i from 1 through $numcol{
+// 	@include gencol($i);
+// }
+
+// @media screen and (max-width: 600px){
+// 	@for $i from 1 through $numcol {
+// 		@include gencol('s',$i);
+// 	}
+// }
+.site-menu {
+	&__dropdown{
+		list-style: none;
+		&&--single {
+			display: inline;
+		}
+	}
+}
+.col-*{
+	width: 100%;
+}
+@each $size-name, $size-value in('l', 1500px), ('m', 800px), ('s', 600px){
+	@media screen and (max-width: $size-value){
+		@for $i from 1 through $numcol {
+			@include gencol($size-name,$i);
+		}
+	}
+}
+.item {
+	height: 100px;
+	float: left;
+}
+.b1 {
+	background: red;
+}
+.b2 {
+	background: blue;
+}
+.b3 {
+	background: green;
+}
+.b4 {
+	background: #451532;
+}
+.b5 {
+	background: yellow;
+}
